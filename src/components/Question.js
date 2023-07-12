@@ -5,13 +5,14 @@ function Question({ question, onAnswered }) {
 
   useEffect(() => {
     const timerId = setTimeout(()=> {
-      if (timeRemaining === 1) {
-        onAnswered(false) 
-        setTimeRemaining(10)
-      }
-      else setTimeRemaining(timeRemaining -1)
-    }, 1000);
+      setTimeRemaining(timeRemaining -1)
+      }, 1000);
 
+    if (timeRemaining === 0) {
+      onAnswered(false) 
+      setTimeRemaining(10)
+    }
+    
     return function cleanup() {
       clearTimeout(timerId)
     }
